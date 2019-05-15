@@ -1,57 +1,31 @@
-### Project Name: Item Catalog App.
-This project sets up a **PostgreSQL** database for a **news** website...
-The provided Python script **application.py** uses the **SQLAlchemy** library to query 
-the database and **Flask** to handle the front end elements of the app.
+# Project Name: Linux Server Configuration.
+This project sets up a linux server to serve a previously prepared web application.
 
-#### Requirements
+#### Software installed
 - Python 3
 - Flask
 - SQLAlchemy
 - Oauth2client
 - Httplib2
+- PostgreSQL
+- mod_wsgi
 
+#### Configuration changes
+- SSH port changed from 22 to 2200
+- HTTP port changed to 80
+- NTP port changed to 123
+- Created user grader and gave it sudo rights
+- Changed local timezone to UTC
+- Installed git
+- Pulled web app
+- Created catalog user on PostgreSQL
+- Made changes to web app code to create database with catalog user
+- Created conf files necessary for apache to server the application
 
-#####The database
+#### Website address
+- http://34.243.191.209.nip.io/
 
-######Catalog table
- Column  |    Type      |  Modifiers                       
----------|:------------:|-------------------
- id      | Integer      | primary_key
- name    | String       | not nullable
- user_id | Integer      | ForeignKey
- user    | relationship 
-
-######Catalog item table
- Column       |      Type        |      Modifiers                       
---------------|:----------------:|------------------------------------
- name         | String           | not nullable
- id           | Integer          | primary_key
- description  | String           |
- catalog_id   | Integer          | ForeignKey
- catalog      | relationship     |
- user_id      | Integer          | ForeignKey
- user         | relationship     |
- created_date | DateTime         | default=datetime.datetime.utcnow
-
-######User table
- Column  |  Type   |  Modifiers                     
----------|:-------:|------------------
- id      | Integer | primary_key
- name    | String  | not nullable
- email   | String  | not nullable
- picture | String  |
-
-
-####Running the code
-Create the database:
+#### Connecting to the server
 ```
-$ python3 database_setup.py
-```
-Populate the database:
-```
-$ python3 lotsofcatalogs.py
-```
-Run the website:
-```
-$ python3 application.py
+$ ssh -i <grader private key name>.pem grader@34.243.191.209 -p 2200
 ```
